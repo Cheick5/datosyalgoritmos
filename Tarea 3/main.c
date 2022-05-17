@@ -1,22 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-//#include "enemigo.h"
 #include "hash.h"
 
-
 #define TABLE_SIZE 5
-
-
 
 enum OPTIONS {NOMBRE = 1, CATEGORIA = 2, PROBABILIDAD = 3};
 
 int main(int argc, char* argv[]) {
 
-
-    printf("%s\n",argv[1]);
-
-
+//printf("%s\n",argv[1]);
 
     FILE *fp = fopen(argv[1], "r");
     char line[1000];
@@ -33,15 +26,10 @@ int main(int argc, char* argv[]) {
     // segundo while para rellenar los arreglos
     while (fgets(line, 100, fp) != NULL) {
 
-
-
         char *token = strtok(line, separa);
 
         int columna = 1;
         atacante aux;
-
-
-
 
         if (token != NULL)
         {
@@ -71,8 +59,4 @@ int main(int argc, char* argv[]) {
     }
     imprimir_tabla_encadenamiento(tabla,TABLE_SIZE);
     return 0;
-
 }
-
-
-
