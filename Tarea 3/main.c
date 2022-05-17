@@ -24,12 +24,15 @@ int main(int argc, char* argv[]) {
     char separa[] = ",";
     int categoria;
     struct node *tabla[TABLE_SIZE];
+    for (int i = 0; i < TABLE_SIZE; ++i) {
+        tabla[i] = NULL; //Inicializamos la tabla en null para evitar errores random
+    }
 
     fgets(line, 100, fp); // ignoramos la cabecera
     printf("line = %s\n",line);
     // segundo while para rellenar los arreglos
     while (fgets(line, 100, fp) != NULL) {
-//        printf("entro\n");
+
 
 
         char *token = strtok(line, separa);
@@ -46,54 +49,27 @@ int main(int argc, char* argv[]) {
                 switch (columna) {
                     case NOMBRE:
                         strcpy(aux.nombre,token);
-//                        printf("NOMBRE = %s \n",aux.nombre);
+
                         break;
                     case PROBABILIDAD:
                         aux.prob_ataque = atof(token);
-//                        printf("PROBABILIDAD = %f \n",aux.prob_ataque);
+
 
                         break;
                     case CATEGORIA:
                         categoria = atoi(token);
-//                        printf("CATEGORIA = %d \n",categoria);
                         break;
                 }
 
-//                printf("token = %s--a = %d\n",token,a);
                 columna++;
                 token = strtok(NULL, separa);
             }
-                printf("aux nombre = %s, aux categoria = %d, aux probabilidad = %f\n",aux.nombre,categoria,aux.prob_ataque);
-            printf("\n");
-            insertar_encadenamiento(tabla, categoria, aux);
-            printf("tabla = %s\n",tabla[categoria]->x.nombre);
-//            imprimir_tabla_encadenamiento(tabla,TABLE_SIZE);
+//            printf("aux nombre = %s, aux categoria = %d, aux probabilidad = %f\n",aux.nombre,categoria,aux.prob_ataque);
+            insertar_encadenamiento(tabla, categoria-1, aux);
+//            printf("tabla = %s\n",tabla[categoria]->x.nombre);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        strcpy(aux.nombre, strtok(line, ","));
-//        printf("aux nombre = %s\n",aux.nombre);
-
-
-//        categoria = atoi(strtok(NULL, ","));
-//        printf("aux categoria = %f\n",categoria);
-
-//        insertar_encadenamiento(tabla, categoria, aux);
-//        imprimir_tabla_encadenamiento(tabla,1000);
-
-
     }
+    imprimir_tabla_encadenamiento(tabla,TABLE_SIZE);
     return 0;
 
 }

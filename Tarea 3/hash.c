@@ -39,9 +39,8 @@ void insertar_encadenamiento(struct node **tabla, int categoria, atacante key)
         al preguntar por it->x == key nos saltamos el ultimo dato de la lista
         */
         while(it->next != NULL) {
-            printf("hol\n");
             if((it->next)->x.nombre == key.nombre) { // caso en que key esta en la tabla (no hay que insertar)
-            printf("hol2\n");
+
                 return;
             }
             it = it->next;
