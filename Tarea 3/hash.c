@@ -9,21 +9,21 @@
  * Función para insertar en una tabla
  *
  * @param tabla es el puntero al puntero de la tabla a insertar
- * @param N Categoria del atacante
+ * @param categoria Categoria del atacante
  * @param key struct del atacante
 
  */
-void insertar_encadenamiento(struct node **tabla, int N, atacante key)
+void insertar_encadenamiento(struct node **tabla, int categoria, atacante key)
 {
-    int i = N; // calculamos el valor de la funcion de hash
-    if (tabla[i] == NULL) { // caso que la lista tabla[i] es vacia
+     // calculamos el valor de la funcion de hash
+    if (tabla[categoria] == NULL) { // caso que la lista tabla[categoria] es vacia
         struct node *nuevo_nodo = (struct node *)malloc(sizeof(struct node));
         nuevo_nodo->x = key;
         nuevo_nodo->next = NULL;
-        tabla[i] = nuevo_nodo; // nuevo nodo pasa a ser el primer nodo
+        tabla[categoria] = nuevo_nodo; // nuevo nodo pasa a ser el primer nodo
     }
-    else { // caso que la lista tabla[i] no es vacia
-        struct node *it = tabla[i];
+    else { // caso que la lista tabla[categoria] no es vacia
+        struct node *it = tabla[categoria];
 
         /* si el dato del primer nodo es key, no hay que insertar
         Es importante hacer el caso del primero nodo aparte, ya que el while de abajo,
@@ -39,7 +39,9 @@ void insertar_encadenamiento(struct node **tabla, int N, atacante key)
         al preguntar por it->x == key nos saltamos el ultimo dato de la lista
         */
         while(it->next != NULL) {
-            if(it->next->x.nombre == key.nombre) { // caso en que key esta en la tabla (no hay que insertar)
+            printf("hol\n");
+            if((it->next)->x.nombre == key.nombre) { // caso en que key esta en la tabla (no hay que insertar)
+            printf("hol2\n");
                 return;
             }
             it = it->next;
@@ -72,8 +74,8 @@ void imprimir_tabla_encadenamiento(struct node **tabla, int N)
     for(int i=0; i<N; i++) {
         struct node *it = tabla[i];
         while(it != NULL) {
-            printf("%d ", it->x.nombre);
-            printf("%d ", it->x.prob_ataque);
+            printf("nombre = %s ", it->x.nombre);
+            printf("probabilidad = %f ", it->x.prob_ataque);
             it = it->next;
         }
         printf("\n");
