@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-//#include "enemigo.h"
 #include "hash.h"
 
 /*
@@ -109,6 +108,29 @@ void ordenar_lista(struct node *lista)
             }
             it = it->next;
         }
+        it = lista; // inicializamos el iterador it
+    }
+}
+
+void ordenar_lista_Alfabetico(struct node *lista)
+{
+    if (lista == NULL){ // caso lista vacia
+        return;
+    }
+
+    int swapped = 1; // indica si hubo algun swap
+    struct node *it = lista;
+    while(swapped == 1){
+        swapped = 0;
+        while (it->next != NULL){
+            if(it->x.prob_ataque == it->next->x.prob_ataque){
+                if(strcmp(it->x.nombre, it->next->x.nombre) > 0) { // debemos hacer swap
+                    swap(it, it->next);
+                    swapped = 1;
+                }
+            }
+                it = it->next;
+            }
         it = lista; // inicializamos el iterador it
     }
 }

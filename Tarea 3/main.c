@@ -11,7 +11,8 @@ int main(int argc, char* argv[]) {
 
 //printf("%s\n",argv[1]);
 
-    FILE *fp = fopen(argv[1], "r");
+    FILE *fp = fopen("mensaje.txt", "r");
+    // FILE *fp = fopen(argv[1], "r");
     char line[1000];
     int count = 0;
     char separa[] = ",";
@@ -64,9 +65,6 @@ int main(int argc, char* argv[]) {
 
         }
     }
-    imprimir_tabla_encadenamiento(tabla,TABLE_SIZE);
-
-
 
     printf("\n");
 
@@ -75,9 +73,12 @@ int main(int argc, char* argv[]) {
     ordenar_lista(tabla[2]);
     ordenar_lista(tabla[3]);
     ordenar_lista(tabla[4]);
+    ordenar_lista_Alfabetico(tabla[0]);
+    ordenar_lista_Alfabetico(tabla[1]);
+    ordenar_lista_Alfabetico(tabla[2]);
+    ordenar_lista_Alfabetico(tabla[3]);
+    ordenar_lista_Alfabetico(tabla[4]);
     imprimir_tabla_encadenamiento(tabla,TABLE_SIZE);
-
-
 
     return 0;
 }
