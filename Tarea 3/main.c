@@ -46,11 +46,16 @@ int main(int argc, char* argv[]) {
 
                     case PROBABILIDAD:
 
-                    if(categoria == 4 || categoria == 5 ){
+                    if(categoria == 4 || categoria == 5){
                         if(atof(token) == 0) {
                             aux.prob_ataque = 1;
                         }
                     }
+
+                    else if (categoria == 3 && atof(token) == 0){
+                        
+                    }
+
                     else{
                         aux.prob_ataque = atof(token);
                     }
@@ -68,11 +73,14 @@ int main(int argc, char* argv[]) {
 
     printf("\n");
 
+    //Se ordena cada una de las categorias (1-5) en base a la probabilidad.
     ordenar_lista(tabla[0]);
     ordenar_lista(tabla[1]);
     ordenar_lista(tabla[2]);
     ordenar_lista(tabla[3]);
     ordenar_lista(tabla[4]);
+
+    //Se ordena cada una de las categotias (1-5) alfabeticamente (para aquellos que tienen la misma probabilidad).
     ordenar_lista_Alfabetico(tabla[0]);
     ordenar_lista_Alfabetico(tabla[1]);
     ordenar_lista_Alfabetico(tabla[2]);
