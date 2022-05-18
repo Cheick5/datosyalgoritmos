@@ -72,12 +72,43 @@ void imprimir_tabla_encadenamiento(struct node **tabla, int N)
     // para cada casilla i de la tabla, recorremos la lista tabla[i]
     for(int i=0; i<N; i++) {
         struct node *it = tabla[i];
+            printf("Categoria = %d | ", i+1);
         while(it != NULL) {
+
             printf("nombre = %s ", it->x.nombre);
             printf("probabilidad = %f ", it->x.prob_ataque);
+            printf("| ");
             it = it->next;
         }
         printf("\n");
 
+    }
+}
+
+void swap(struct node *nodo1, struct node *nodo2){
+
+    atacante tmp = nodo1->x;
+    nodo1->x = nodo2->x;
+    nodo2->x = tmp;
+}
+
+void ordenar_lista(struct node *lista)
+{
+    if (lista == NULL){ // caso lista vacia
+        return;
+    }
+
+    int swapped = 1; // indica si hubo algun swap
+    struct node *it = lista;
+    while(swapped == 1){
+        swapped = 0;
+        while (it->next != NULL){
+            if(it->x.prob_ataque > it->next->x.prob_ataque) { // debemos hacer swap
+                swap(it, it->next);
+                swapped = 1;
+            }
+            it = it->next;
+        }
+        it = lista; // inicializamos el iterador it
     }
 }

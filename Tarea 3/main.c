@@ -39,24 +39,45 @@ int main(int argc, char* argv[]) {
                         strcpy(aux.nombre,token);
 
                         break;
-                    case PROBABILIDAD:
-                        aux.prob_ataque = atof(token);
-
-
-                        break;
                     case CATEGORIA:
                         categoria = atoi(token);
+                        break;
+
+                    case PROBABILIDAD:
+
+                    if(categoria == 4 || categoria == 5 ){
+                        if(atof(token) == 0) {
+                            aux.prob_ataque = 1;
+                        }
+                    }
+                    else{
+                        aux.prob_ataque = atof(token);
+                    }
                         break;
                 }
 
                 columna++;
                 token = strtok(NULL, separa);
             }
-//            printf("aux nombre = %s, aux categoria = %d, aux probabilidad = %f\n",aux.nombre,categoria,aux.prob_ataque);
+
             insertar_encadenamiento(tabla, categoria-1, aux);
-//            printf("tabla = %s\n",tabla[categoria]->x.nombre);
+
         }
     }
     imprimir_tabla_encadenamiento(tabla,TABLE_SIZE);
+
+
+
+    printf("\n");
+
+    ordenar_lista(tabla[0]);
+    ordenar_lista(tabla[1]);
+    ordenar_lista(tabla[2]);
+    ordenar_lista(tabla[3]);
+    ordenar_lista(tabla[4]);
+    imprimir_tabla_encadenamiento(tabla,TABLE_SIZE);
+
+
+
     return 0;
 }
