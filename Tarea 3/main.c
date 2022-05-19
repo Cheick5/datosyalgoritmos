@@ -11,8 +11,8 @@ int main(int argc, char* argv[]) {
 
 //printf("%s\n",argv[1]);
 
-    FILE *fp = fopen("mensaje.txt", "r");
-    // FILE *fp = fopen(argv[1], "r");
+    // FILE *fp = fopen("mensaje.txt", "r");
+    FILE *fp = fopen(argv[1], "r");
     char line[1000];
     int count = 0;
     char separa[] = ",";
@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     }
 
     fgets(line, 100, fp); // ignoramos la cabecera
-    printf("line = %s\n",line);
+    // printf("line = %s\n",line);
     // segundo while para rellenar los arreglos
     while (fgets(line, 100, fp) != NULL) {
 
@@ -72,8 +72,9 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    printf("\n");
+    fclose(fp);
 
+    printf("\n");
 
     for (int i = 0; i < TABLE_SIZE; ++i) {
         //Se ordena cada una de las categorias (1-5) en base a la probabilidad.
@@ -92,9 +93,21 @@ int main(int argc, char* argv[]) {
 
     ordenar_lista_Alfabetico(tabla[2]);
 
+    imprimir_tabla_encadenamiento(tabla, 5);
 
 
+    // for (int i = 0; i < TABLE_SIZE; i++){
+    //     printf("%s", tabla[i]->x.nombre);
+    // }
 
+    FILE *fpout = fopen(argv[3], "w");
+    int N = atoi(argv[2]);
+    for (int i = 0; i < N; i++) {
+        fputs(tabla[i]->x.nombre, fpout);
+        // fputs("\n", fpout);
+    }
+
+    fclose(fpout);
 
     return 0;
 }

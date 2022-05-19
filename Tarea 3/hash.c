@@ -69,7 +69,7 @@ int buscar_encadenamiento(struct node **tabla, int N, atacante key)
 void imprimir_tabla_encadenamiento(struct node **tabla, int N)
 {
     // para cada casilla i de la tabla, recorremos la lista tabla[i]
-    for(int i=2; i<3; i++) {
+    for(int i = 0; i < N; i++) {
         struct node *it = tabla[i];
             printf("Categoria = %d | \n", i+1);
         while(it != NULL) {
