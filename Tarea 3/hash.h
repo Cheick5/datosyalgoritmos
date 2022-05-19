@@ -7,4 +7,4 @@ void ordenar_lista(struct node *lista);
 void ordenar_lista_Alfabetico(struct node *lista);
 int largo_hash(struct node *lista);
 int largo_hash_con_prob(struct node *lista);
-void ordenamiento_categoria_3(struct node *lista,int largo_tabla);
+void ordenamiento_categoria_3(struct node *lista, int largo_con_prob,int cantidad);

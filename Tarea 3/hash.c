@@ -104,7 +104,7 @@ void ordenar_lista(struct node *lista)
     while(swapped == 1){
         swapped = 0;
         while (it->next != NULL){
-            if(it->x.prob_ataque > it->next->x.prob_ataque) { // debemos hacer swap
+            if(it->x.prob_ataque < it->next->x.prob_ataque) { // debemos hacer swap
                 swap(it, it->next);
                 swapped = 1;
             }
@@ -126,7 +126,7 @@ void ordenar_lista_Alfabetico(struct node *lista)
         swapped = 0;
         while (it->next != NULL){
             if(it->x.prob_ataque == it->next->x.prob_ataque){
-                if(strcmp(it->x.nombre, it->next->x.nombre) < 0) { // debemos hacer swap
+                if(strcmp(it->x.nombre, it->next->x.nombre) > 0) { // debemos hacer swap
                     swap(it, it->next);
                     swapped = 1;
                 }
@@ -163,29 +163,39 @@ int largo_hash_con_prob(struct node *lista){
 
 }
 
-void ordenamiento_categoria_3(struct node *lista,int largo_tabla){
+void ordenamiento_categoria_3(struct node *lista, int largo_con_prob,int cantidad){
 
-    struct node *it = lista;
-    struct node *inicio = it;
-    while(it->next != NULL) {
-        if (it->x.prob_ataque != 0) {
-            break;
-        }
-        it = it->next; //it Khloe
-    }
+    struct node *it = lista; //it = jimmy
+    struct node *final = it; //inicio == jimmy
 
-    for (int i = 0; i < largo_tabla/2; ++i) {
+    for (int i = 0; i < largo_con_prob/2; ++i) { //For para que it llegue a la mitad de las personas con probabilidad
+        it = it->next;
+    } //it = lory
 
-        swap(inicio,it); //inicio = NS ||  it = Khloe
+
+    int largo_sin_prob =cantidad - largo_con_prob;
+    int mitad_de_sin_prob = largo_con_prob+(largo_sin_prob)/2;
+    printf("hola si mira tu hablas con dross = %d",mitad_de_sin_prob);
+
+
+
+    for (int i = 0; i < mitad_de_sin_prob; ++i) {
+        final = final->next;
+    } //final = Luka mi polla con peluka
+
+
+    for (int i = largo_con_prob/2; i > 0; --i) {
+
+        swap(final,it); //final = Luka ||  it = lory
 
 
         struct node *temp;
 
-        temp = inicio; //temp = NS
+        temp = final; //temp = darryl
 
-        it = it->next; //It = Luka
+        it = it->next; //It = Khloe
 
-        inicio = temp->next; //Inicio = Lory
+        final = temp->next; //Inicio = Justin
 
 
     }

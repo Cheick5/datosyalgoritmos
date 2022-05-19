@@ -87,31 +87,40 @@ int main(int argc, char* argv[]) {
 
     int cant_con_prob = largo_hash_con_prob(tabla[2]);
 
-    ordenamiento_categoria_3(tabla[2],cant_con_prob);
+    int cantidad = largo_hash(tabla[2]);
+
+    ordenamiento_categoria_3(tabla[2],cant_con_prob,cantidad);
 
     ordenar_lista_Alfabetico(tabla[2]);
 
-    // int contador = 0;
-    // FILE *fpout = fopen(argv[3], "w");
-    // int N = atoi(argv[2]);
+    imprimir_tabla_encadenamiento(tabla,5);
 
-    // for (int i = 0; i < 5; i++) {
-        
-    //     for (int j = 0; j < largo_hash(tabla[i]); j++){
+     int contador = 0;
+     FILE *fpout = fopen(argv[3], "w");
+     int N = atoi(argv[2]);
 
-    //     if (contador < N){
-        
-    //      fprintf(fpout, "%s\n", tabla[j]->x.nombre);
-    //      contador++;
-    //     }
-        
-    //     else if (contador > N){
-    //         break;
-    //     }
-    // }
-    // }
 
-    // fclose(fpout);
+     for (int i = TABLE_SIZE-1; i >= 0; i--) { //Para cada categoria
+        struct node *it = tabla[i];
+        int largo = largo_hash(it);
+
+         for (int j = 0; j <largo ; j++){ // 1: Dentro de Categoria 5, iterar el largo de
+
+         if (contador < N){
+        
+          fprintf(fpout, "%s\n", it->x.nombre);
+          it = it->next;
+          contador++;
+         }
+        
+         else if (contador > N){
+             break;
+         }
+     }
+     }
+
+     fclose(fpout);
+     printf("hola");
 
     return 0;
 }
