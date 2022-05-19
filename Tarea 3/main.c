@@ -46,7 +46,6 @@ int main(int argc, char* argv[]) {
 
                     case PROBABILIDAD:
 
-
                     if (categoria == 3 && atof(token) == 0){
                         aux.prob_ataque = 0;
                     }
@@ -86,28 +85,33 @@ int main(int argc, char* argv[]) {
         ordenar_lista_Alfabetico(tabla[i]);
     }
 
-
     int cant_con_prob = largo_hash_con_prob(tabla[2]);
 
     ordenamiento_categoria_3(tabla[2],cant_con_prob);
 
     ordenar_lista_Alfabetico(tabla[2]);
 
-    imprimir_tabla_encadenamiento(tabla, 5);
+    // int contador = 0;
+    // FILE *fpout = fopen(argv[3], "w");
+    // int N = atoi(argv[2]);
 
+    // for (int i = 0; i < 5; i++) {
+        
+    //     for (int j = 0; j < largo_hash(tabla[i]); j++){
 
-    // for (int i = 0; i < TABLE_SIZE; i++){
-    //     printf("%s", tabla[i]->x.nombre);
+    //     if (contador < N){
+        
+    //      fprintf(fpout, "%s\n", tabla[j]->x.nombre);
+    //      contador++;
+    //     }
+        
+    //     else if (contador > N){
+    //         break;
+    //     }
+    // }
     // }
 
-    FILE *fpout = fopen(argv[3], "w");
-    int N = atoi(argv[2]);
-    for (int i = 0; i < N; i++) {
-        fputs(tabla[i]->x.nombre, fpout);
-        // fputs("\n", fpout);
-    }
-
-    fclose(fpout);
+    // fclose(fpout);
 
     return 0;
 }
