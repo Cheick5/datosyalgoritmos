@@ -181,7 +181,7 @@ void ordenamiento_categoria_3(struct node *lista, int largo_con_prob,int cantida
 
     for (int i = 0; i < mitad_de_sin_prob; ++i) {
         final = final->next;
-    } //final = Luka mi polla con peluka
+    } //final = Luka
 
 
     for (int i = largo_con_prob/2; i > 0; --i) {
