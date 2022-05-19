@@ -46,14 +46,15 @@ int main(int argc, char* argv[]) {
 
                     case PROBABILIDAD:
 
-                    if(categoria == 4 || categoria == 5){
-                        if(atof(token) == 0) {
-                            aux.prob_ataque = 1;
-                        }
-                    }
 
-                    else if (categoria == 3 && atof(token) == 0){
-                        
+                    if (categoria == 3 && atof(token) == 0){
+                        aux.prob_ataque = 0;
+                    }
+                    else if(categoria == 4 && atof(token) == 0){
+                        aux.prob_ataque = 1;
+                    }
+                    else if (categoria == 5 && atof(token) == 0){
+                        aux.prob_ataque = 1;
                     }
 
                     else{
@@ -73,20 +74,27 @@ int main(int argc, char* argv[]) {
 
     printf("\n");
 
-    //Se ordena cada una de las categorias (1-5) en base a la probabilidad.
-    ordenar_lista(tabla[0]);
-    ordenar_lista(tabla[1]);
-    ordenar_lista(tabla[2]);
-    ordenar_lista(tabla[3]);
-    ordenar_lista(tabla[4]);
 
-    //Se ordena cada una de las categotias (1-5) alfabeticamente (para aquellos que tienen la misma probabilidad).
-    ordenar_lista_Alfabetico(tabla[0]);
-    ordenar_lista_Alfabetico(tabla[1]);
+    for (int i = 0; i < TABLE_SIZE; ++i) {
+        //Se ordena cada una de las categorias (1-5) en base a la probabilidad.
+        ordenar_lista(tabla[i]);
+    }
+    for (int i = 0; i < TABLE_SIZE; ++i) {
+
+        //Se ordena cada una de las categotias (1-5) alfabeticamente (para aquellos que tienen la misma probabilidad).
+        ordenar_lista_Alfabetico(tabla[i]);
+    }
+
+
+    int cant_con_prob = largo_hash_con_prob(tabla[2]);
+
+    ordenamiento_categoria_3(tabla[2],cant_con_prob);
+
     ordenar_lista_Alfabetico(tabla[2]);
-    ordenar_lista_Alfabetico(tabla[3]);
-    ordenar_lista_Alfabetico(tabla[4]);
-    imprimir_tabla_encadenamiento(tabla,TABLE_SIZE);
+
+
+
+
 
     return 0;
 }

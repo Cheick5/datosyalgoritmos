@@ -69,14 +69,16 @@ int buscar_encadenamiento(struct node **tabla, int N, atacante key)
 void imprimir_tabla_encadenamiento(struct node **tabla, int N)
 {
     // para cada casilla i de la tabla, recorremos la lista tabla[i]
-    for(int i=0; i<N; i++) {
+    for(int i=2; i<3; i++) {
         struct node *it = tabla[i];
-            printf("Categoria = %d | ", i+1);
+            printf("Categoria = %d | \n", i+1);
         while(it != NULL) {
 
             printf("nombre = %s ", it->x.nombre);
             printf("probabilidad = %f ", it->x.prob_ataque);
             printf("| ");
+            printf("\n");
+
             it = it->next;
         }
         printf("\n");
@@ -124,7 +126,7 @@ void ordenar_lista_Alfabetico(struct node *lista)
         swapped = 0;
         while (it->next != NULL){
             if(it->x.prob_ataque == it->next->x.prob_ataque){
-                if(strcmp(it->x.nombre, it->next->x.nombre) > 0) { // debemos hacer swap
+                if(strcmp(it->x.nombre, it->next->x.nombre) < 0) { // debemos hacer swap
                     swap(it, it->next);
                     swapped = 1;
                 }
@@ -133,4 +135,59 @@ void ordenar_lista_Alfabetico(struct node *lista)
             }
         it = lista; // inicializamos el iterador it
     }
+}
+
+int largo_hash(struct node *lista){
+
+    int contador = 1;
+    struct node *it = lista;
+    while(it->next != NULL){
+        contador++;
+        it = it->next;
+    }
+    return contador;
+
+}
+
+int largo_hash_con_prob(struct node *lista){
+
+    int contador = 1;
+    struct node *it = lista;
+    while(it->next != NULL){
+        if(it->x.prob_ataque != 0) {
+            contador++;
+        }
+        it = it->next;
+    }
+    return contador;
+
+}
+
+void ordenamiento_categoria_3(struct node *lista,int largo_tabla){
+
+    struct node *it = lista;
+    struct node *inicio = it;
+    while(it->next != NULL) {
+        if (it->x.prob_ataque != 0) {
+            break;
+        }
+        it = it->next; //it Khloe
+    }
+
+    for (int i = 0; i < largo_tabla/2; ++i) {
+
+        swap(inicio,it); //inicio = NS ||  it = Khloe
+
+
+        struct node *temp;
+
+        temp = inicio; //temp = NS
+
+        it = it->next; //It = Luka
+
+        inicio = temp->next; //Inicio = Lory
+
+
+    }
+
 }
