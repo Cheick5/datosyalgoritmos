@@ -3,15 +3,6 @@
 #include <stdlib.h>
 #include "hash.h"
 
-/*
- *
- * Función para insertar en una tabla
- *
- * @param tabla es el puntero al puntero de la tabla a insertar
- * @param categoria Categoria del atacante
- * @param key struct del atacante
-
- */
 void insertar_encadenamiento(struct node **tabla, int categoria, atacante key)
 {
      // calculamos el valor de la funcion de hash
@@ -31,7 +22,6 @@ void insertar_encadenamiento(struct node **tabla, int categoria, atacante key)
         if(it->x.nombre == key.nombre) {
             return;
         }
-
         /* recorremos la lista
         OJO: esta parte es distinta a la del video de la ayudantia,
         ahora preguntamos por it->next->x == key en vez de it->x == key,
@@ -68,7 +58,6 @@ void imprimir_tabla_encadenamiento(struct node **tabla, int N)
             it = it->next;
         }
         printf("\n");
-
     }
 }
 
@@ -132,7 +121,6 @@ int largo_hash(struct node *lista){
         it = it->next;
     }
     return contador;
-
 }
 
 int largo_hash_con_prob(struct node *lista){
@@ -146,17 +134,12 @@ int largo_hash_con_prob(struct node *lista){
         it = it->next;
     }
     return contador;
-
 }
-
 
 struct node * ordenamiento_categoria_3(struct node *lista){
 
     struct node *it = lista;//Primera lista auxiliar
     struct node *inicio = it;//Segunda lista auxiliar
-
-
-
 
     //Crear una lista temporal o auxiliar, que sera la que iran llenando de forma
     //ordenada en base a la lista de la categoria 3
@@ -167,36 +150,34 @@ struct node * ordenamiento_categoria_3(struct node *lista){
         lista_temporal[i] = NULL; //Inicializamos la tabla en null para evitar errores random
     }
 
-    int tope=largo_hash_con_prob(lista);
-    int mitad=tope/2;
+    int Maximo_Personas_Con_Prob = largo_hash_con_prob(lista);
+    int mitad = Maximo_Personas_Con_Prob/2;
 
-
-    int n=0;
-    while(it!=NULL){
-        if (n<mitad){ //Primera mitad
-            insertar_encadenamiento(lista_temporal,0,it->x);
+    int Contador = 0;
+    while(it != NULL){
+        if (Contador < mitad){ //Primera mitad
+            insertar_encadenamiento(lista_temporal, 0, it->x);
         }
 
-        else if (n>=tope-1){ // prob = 0
-            insertar_encadenamiento(lista_temporal,0,it->x);
+        else if (Contador >= Maximo_Personas_Con_Prob - 1){ // prob = 0
+            insertar_encadenamiento(lista_temporal, 0, it->x);
         }
-            it=it->next;
-        n++;
+            it = it->next;
+        Contador++;
     }
-    n=0;
-    struct node *it2=inicio;
-    while(it2!=NULL){
-        if (n>=mitad && n<tope-1){ //segunda mitad
 
-            // n>=mitad && n<tope
+    Contador = 0;
+    struct node *it2 = inicio;
 
-            insertar_encadenamiento(lista_temporal,0,it2->x);
+    while(it2 != NULL){
+        if (Contador >= mitad && Contador < Maximo_Personas_Con_Prob - 1){ //segunda mitad
+
+            insertar_encadenamiento(lista_temporal, 0, it2->x);
         }
-        n++;
-        it2=it2->next;
+        Contador++;
+        it2 = it2->next;
     }
 
     return lista_temporal[0];
-
 }
 

@@ -9,9 +9,6 @@ enum OPTIONS {NOMBRE = 1, CATEGORIA = 2, PROBABILIDAD = 3};
 
 int main(int argc, char* argv[]) {
 
-//printf("%s\n",argv[1]);
-
-    // FILE *fp = fopen("mensaje.txt", "r");
     FILE *fp = fopen(argv[1], "r");
     char line[1000];
     char separa[] = ",";
@@ -65,7 +62,6 @@ int main(int argc, char* argv[]) {
             }
 
             insertar_encadenamiento(tabla, categoria-1, aux);
-
         }
     }
 
@@ -83,19 +79,17 @@ int main(int argc, char* argv[]) {
         ordenar_lista_Alfabetico(tabla[i]);
     }
 
-
+    //Se crea un nodo adicional (temporal) para que ese nodo sea la lista que es generada por la funcion "ordenamiento_categoria_3" y luego se asigna a tabla[2] (categoria 3) temporal.
     struct node * temporal = ordenamiento_categoria_3(tabla[2]);
     tabla[2] = temporal;
 
-
     ordenar_lista_Alfabetico(tabla[2]);
 
-    imprimir_tabla_encadenamiento(tabla,5);
+    // imprimir_tabla_encadenamiento(tabla,5); // Se imprimen todas las listas con las 5 categorias.
 
      int contador = 0;
      FILE *fpout = fopen(argv[3], "w");
      int N = atoi(argv[2]);
-
 
      for (int i = TABLE_SIZE-1; i >= 0; i--) { //Para cada categoria
         struct node *it = tabla[i];
