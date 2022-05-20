@@ -154,7 +154,7 @@ struct node * ordenamiento_categoria_3(struct node *lista){
     int mitad = Maximo_Personas_Con_Prob/2;
 
     int Contador = 0;
-    while(it != NULL){
+    while(it->next != NULL){
         if (Contador < mitad){ //Primera mitad
             insertar_encadenamiento(lista_temporal, 0, it->x);
         }
@@ -169,7 +169,7 @@ struct node * ordenamiento_categoria_3(struct node *lista){
     Contador = 0;
     struct node *it2 = inicio;
 
-    while(it2 != NULL){
+    while(it2->next != NULL){
         if (Contador >= mitad && Contador < Maximo_Personas_Con_Prob - 1){ //segunda mitad
 
             insertar_encadenamiento(lista_temporal, 0, it2->x);

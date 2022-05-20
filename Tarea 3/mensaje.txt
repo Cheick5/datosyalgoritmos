@@ -24,13 +24,9 @@ Jimmy Butler,3,0.873
 Jason Williams,4,
 Khloe Kardashian,3,0.2673
 Daryl Palumbo,3,
-Nicolas Sanchez,3,
 Martina Hingis,2,
 Naomi Osaka,4,
 Dave Weckl,2,0.538
 Marcus Miller,4,0.3894
 Iga Swiatek,2,
 Victor Wooten,4,0.7393
-Andrewwar,3,0.9
-vicete,3,0.8
-asd,3,0.1
