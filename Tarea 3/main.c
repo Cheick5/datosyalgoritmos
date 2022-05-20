@@ -14,7 +14,6 @@ int main(int argc, char* argv[]) {
     // FILE *fp = fopen("mensaje.txt", "r");
     FILE *fp = fopen(argv[1], "r");
     char line[1000];
-    int count = 0;
     char separa[] = ",";
     int categoria;
     struct node *tabla[TABLE_SIZE];
@@ -23,7 +22,6 @@ int main(int argc, char* argv[]) {
     }
 
     fgets(line, 100, fp); // ignoramos la cabecera
-    // printf("line = %s\n",line);
     // segundo while para rellenar los arreglos
     while (fgets(line, 100, fp) != NULL) {
 
@@ -85,11 +83,10 @@ int main(int argc, char* argv[]) {
         ordenar_lista_Alfabetico(tabla[i]);
     }
 
-    int cant_con_prob = largo_hash_con_prob(tabla[2]);
 
-    int cantidad = largo_hash(tabla[2]);
+    struct node * temporal = ordenamiento_categoria_3(tabla[2]);
+    tabla[2] = temporal;
 
-    ordenamiento_categoria_3(tabla[2],cant_con_prob,cantidad);
 
     ordenar_lista_Alfabetico(tabla[2]);
 
@@ -116,11 +113,10 @@ int main(int argc, char* argv[]) {
          else if (contador > N){
              break;
          }
-     }
+       }
      }
 
      fclose(fpout);
-     printf("hola");
 
     return 0;
 }

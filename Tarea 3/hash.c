@@ -52,20 +52,6 @@ void insertar_encadenamiento(struct node **tabla, int categoria, atacante key)
     }
 }
 
-int buscar_encadenamiento(struct node **tabla, int N, atacante key)
-{
-//    int i = key % N; // calculamos el valor de la funcion de hash
-//    struct node *it = tabla[i];
-//    // recorremos la lista
-//    while(it != NULL) {
-//        if(it->x == key) { // caso en que encontramos key. Retornamos la casilla i
-//            return i;
-//        }
-//        it = it->next;
-//    }
-//    // aca sabemos que key no esta
-//    return -1;
-}
 void imprimir_tabla_encadenamiento(struct node **tabla, int N)
 {
     // para cada casilla i de la tabla, recorremos la lista tabla[i]
@@ -104,7 +90,7 @@ void ordenar_lista(struct node *lista)
     while(swapped == 1){
         swapped = 0;
         while (it->next != NULL){
-            if(it->x.prob_ataque > it->next->x.prob_ataque) { // debemos hacer swap
+            if(it->x.prob_ataque < it->next->x.prob_ataque) { // debemos hacer swap
                 swap(it, it->next);
                 swapped = 1;
             }
@@ -126,7 +112,7 @@ void ordenar_lista_Alfabetico(struct node *lista)
         swapped = 0;
         while (it->next != NULL){
             if(it->x.prob_ataque == it->next->x.prob_ataque){
-                if(strcmp(it->x.nombre, it->next->x.nombre) < 0) { // debemos hacer swap
+                if(strcmp(it->x.nombre, it->next->x.nombre) > 0) { // debemos hacer swap
                     swap(it, it->next);
                     swapped = 1;
                 }
@@ -163,72 +149,54 @@ int largo_hash_con_prob(struct node *lista){
 
 }
 
-void ordenamiento_categoria_3(struct node *lista,int largo_tabla){
 
-    struct node *it = lista;
-    struct node *inicio = it;
-    while(it->next != NULL) {
-        if (it->x.prob_ataque != 0) {
-            break;
-        }
-        it = it->next; //it Khloe
-    }
-
-    for (int i = 0; i < largo_tabla/2; ++i) {
-
-        swap(inicio,it); //inicio = NS ||  it = Khloe
-
-
-        struct node *temp;
-
-        temp = inicio; //temp = NS
-
-        it = it->next; //It = Luka
-
-        inicio = temp->next; //Inicio = Lory
-
-
-    }
-
-}
-
-lista-> proba mas altas, probas igual cero
-
-void cat_3(struct node *lista,int largo_tabla){
+struct node * ordenamiento_categoria_3(struct node *lista){
 
     struct node *it = lista;//Primera lista auxiliar
     struct node *inicio = it;//Segunda lista auxiliar
 
-    int tope=largo_hash_con_prob(it);
-    int mitad=tope/2;
+
+
 
     //Crear una lista temporal o auxiliar, que sera la que iran llenando de forma
     //ordenada en base a la lista de la categoria 3
-    struct node *listica_temporal=(struct node *)malloc(sizeof(struct node));
-    listica_temporal=NULL;
+//    struct node *lista_temporal=(struct node *)malloc(sizeof(struct node));
+    struct node *lista_temporal[1];
+
+    for (int i = 0; i < 1; ++i) {
+        lista_temporal[i] = NULL; //Inicializamos la tabla en null para evitar errores random
+    }
+
+    int tope=largo_hash_con_prob(lista);
+    int mitad=tope/2;
+
+
     int n=0;
     while(it!=NULL){
-        if (n<mitad)
-        {
-            //Llenar lista auxiliar en base a it
+        if (n<mitad){ //Primera mitad
+            insertar_encadenamiento(lista_temporal,0,it->x);
         }
 
-        if (n>tope)
-        {
-            //Llenar lista auxiliar en base a it
+        else if (n>=tope-1){ // prob = 0
+            insertar_encadenamiento(lista_temporal,0,it->x);
         }
-        it=it->next
+            it=it->next;
         n++;
     }
     n=0;
-    struct node it2=inicio;
+    struct node *it2=inicio;
     while(it2!=NULL){
-        if (mitad<n<=tope)
-        {
-            //llenar lista auxiliar en base a it2
+        if (n>=mitad && n<tope-1){ //segunda mitad
+
+            // n>=mitad && n<tope
+
+            insertar_encadenamiento(lista_temporal,0,it2->x);
         }
         n++;
         it2=it2->next;
     }
 
+    return lista_temporal[0];
+
 }
+
