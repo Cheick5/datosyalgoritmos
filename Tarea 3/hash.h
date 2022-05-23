@@ -1,4 +1,7 @@
+// Se incluye el archivo .h que contiene las estructuras. 
 #include "enemigo.h"
+
+// Se definen los prototipos de todas las funciones utilizadas en la realizacion de la tarea.
 void insertar_encadenamiento(struct node **tabla, int N, atacante key);
 void imprimir_tabla_encadenamiento(struct node **tabla, int N);
 void swap(struct node *nodo1, struct node *nodo2);
