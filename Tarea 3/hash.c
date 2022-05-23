@@ -206,14 +206,14 @@ struct node * ordenamiento_categoria_3(struct node *lista){
         Contador++;
     }
     // Se crea la variable contador_2 para tener en cuenta aquellos que ya fueron ingresados.
-    Contador_2 = 0;
+    int Contador_2 = 0;
 
     // Se crea una segunda estructura node "it2" que apunta al inicio de la lista
     struct node *it2 = inicio;
 
     // Ingreso de nombres de aquellos que faltaban en la lista (tienen probabilidad asignada distinta de cero), lo que podriamos llamar como ingreso de nombres a la segunda mitad.
     while(it2->next != NULL){
-        if (Contador >= Mitad && Contador_2 < Personas_Con_Prob - 1){
+        if (Contador_2 >= Mitad && Contador_2 < Personas_Con_Prob - 1){
             
             // Se utiliza la funcion "insertar_encadenamiento" (entregada por profesor) para ingresar el dato a la lista temporal.
             insertar_encadenamiento(lista_temporal, 0, it2->x);
