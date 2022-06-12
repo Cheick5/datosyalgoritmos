@@ -1,6 +1,6 @@
 typedef struct atacantes {
     char nombre[100];
-    // int categoria;
+    int categoria;
     float prob_ataque;
 } atacante;
 
