@@ -9,6 +9,8 @@ int main(int argc, char* argv[]) {
 
     struct node *root = NULL;
 
+    int N = atoi(argv[2]);
+
     // Se abre el archivo que es entregado por el usuario y se crean variables que utilizaremos para leer los datos del archivo.
     FILE *fp = fopen(argv[1], "r");
     char line[1000];
@@ -55,17 +57,9 @@ int main(int argc, char* argv[]) {
     // Se cierra el archivo, puesto que, los datos presentes en el archivo ya fueron ingresados.
     fclose(fp);
 
-    // Esta parte es para imprimir en el archivo de salida los nombres de los N mas peligrosos.
+    // Esta parte es para imprimir por pantalla los nombres de los N mas peligrosos.
 
-    // int contador = 0;
-    int N = atoi(argv[2]);
-    
     int Contador = 0;
-    show_nodes(root);
-    // printf("%d", Contador);
 
-    // while (contador < N){
-    //     show_nodes(root);
-    //     contador = contador + 1;
-    // }
+    show_nodes(root, Contador, N);
 }

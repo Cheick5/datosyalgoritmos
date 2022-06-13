@@ -15,7 +15,7 @@ int menor_que(atacante a1, atacante a2)
     if (a1.categoria == a2.categoria) { //Si son iguales, vemos las probabilidades
         
         // Caso en el cual o la probabilidad del primero es menor a la del segundo o si son iguales y se comparan los nombres alfabeticamente
-        if(a1.prob_ataque < a2.prob_ataque || (a1.prob_ataque == a2.prob_ataque && strcmp(a1.nombre, a2.nombre) < 0)){  
+        if(a1.prob_ataque < a2.prob_ataque || (a1.prob_ataque == a2.prob_ataque && strcmp(a1.nombre, a2.nombre) > 0)){  
             return 1;
         }
 
@@ -138,17 +138,26 @@ struct node *insert(struct node *node, atacante atacante) {
 }
 
 // (D,R,I)
-void show_nodes(struct node *root){
-    
+void show_nodes(struct node *root, int Contador, int N){
+
     if (root == NULL){
         return;
     }
 
-    show_nodes(root->right);
-    printf("Nombre = %s", root->x.nombre);
-    // printf("Categoria = %d ", root->x.categoria);
-    // printf("Probabilidad = %f ", root->x.prob_ataque);
-    show_nodes(root->left);    
+    if (Contador == N){
+        return;
+    }
 
+    // Contador = Contador + 1;
+
+    show_nodes(root->right, Contador + 1, N);
+
+    printf("Nombre = %s \n", root->x.nombre);
+
+    show_nodes(root->left, Contador + 1, N);
+
+
+    // printf("%d\n", Contador);
+    
     return;
 }
