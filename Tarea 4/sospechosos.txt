@@ -1,0 +1,6 @@
+first_name,danger_category,attack_prob
+Antonin Revans,1,0.123584
+Kearney Carding,1,0.2733129
+Anton Sellack,2,0.0023549
+Lory Brydie,3,0.3140912
+Conney Lochrie,5,0.694532

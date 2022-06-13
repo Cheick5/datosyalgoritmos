@@ -4,6 +4,39 @@
 #include <stdlib.h>
 #include "arbol_AVL.h"
 
+
+//Entrega un 1 si el primero es menor
+int menor_que(atacante a1, atacante a2)
+{
+    if (a1.categoria < a2.categoria) { //Comparacion de categorias
+        return 1;
+    }
+
+    if (a1.categoria == a2.categoria) { //Si son iguales, vemos las probabilidades
+
+        if(a1.prob_ataque < a2.prob_ataque || (a1.prob_ataque == a2.prob_ataque && strcmp(a1.nombre, a2.nombre) > 0)) {
+            return 1;
+        }
+
+        else {
+
+            if (strcmp(a1.nombre, a2.nombre) > 0) {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
+}
+
+
+
+// funcion auxiliar maximo
+int max(int a, int b)
+{
+    return (a > b)? a : b;
+}
+
 int height(struct node *node) {
     if (node == NULL) {
         return 0;
@@ -11,6 +44,7 @@ int height(struct node *node) {
     return 1 + max(height(node->left), height(node->right));
 }
 
+//Altura entre dos nodos, positivo si esta cargado a la izquierda
 int balance(struct node *node) {
     if (node == NULL) {
         return 0;
@@ -54,10 +88,10 @@ struct node *rightRotate(struct node *y) {
     return x;
 }
 
-struct node *insert(struct node *node, int data) {
+struct node *insert(struct node *node, atacante atacante) {
     if (node == NULL) { // caso arbol vacio
         struct node *tmp = (struct node *)malloc(sizeof(struct node));
-        tmp->data = data;
+        tmp->x = atacante;
         tmp->left = NULL;
         tmp->right = NULL;
         tmp->height = 1; // en este caso las hojas tienen altura 1
@@ -68,37 +102,52 @@ struct node *insert(struct node *node, int data) {
     // en este caso la raiz es la misma, por eso hacemos "return node;" al final
     // llamamos recursivamente al metodo insert ya sea al lado izquierdo o derecho
     // actualizamos el hijo correpondiente con la nueva raiz obtenida
-    if (data < node->data) {
-        node->left = insert(node->left, data);
+    if (menor_que(atacante,node->x) == 1) {
+        //Si la categoria y la prpobabilidad del atacante a insertar es menor que el que ya está, se inserta a la izquierda
+        node->left = insert(node->left, atacante);
     }
     else {
-        node->right = insert(node->right, data);
+        node->right = insert(node->right, atacante);
     }
 
     // actualizamos height de node
     node->height = height(node);
     // calculamos balance de node
-    // si balance > 1 o balance < -1, el nodo esta desbalanceado
+    // si balance > 1 o balance < -1, el nodo esta desbalanceado, positivo si esta cargado a la izquierda
     int node_balance = balance(node);
 
-    // caso left left
-    if (node_balance > 1 && data < node->left->data) {
+    // caso left left, cargado a la izquierda
+    if (node_balance > 1 && menor_que(atacante,node->left->x) == 1) {
         return rightRotate(node);
     }
     // caso right right
-    if (node_balance < -1 && data >= node->right->data) {
+    if (node_balance < -1 && menor_que(atacante,node->right->x) != 1) {
         return leftRotate(node);
     }
     // caso left right
-    if (node_balance > 1 && data >= node->left->data) {
+    if (node_balance > 1 && menor_que(atacante,node->left->x) != 1 ) {
         node->left = leftRotate(node->left);
         return rightRotate(node);
     }
     // caso right left
-    if (node_balance < -1 && data < node->right->data) {
+    if (node_balance < -1 && menor_que(atacante,node->right->x) == 1) {
         node->right = rightRotate(node->right);
         return leftRotate(node);
     }
 
     return node;
+}
+
+// muestra los nodos inorder (I, R, D)
+void show_nodes_inorder(struct node *root) {
+    if (root == NULL) {
+        return;
+    }
+    show_nodes_inorder(root->left);
+    printf("Nombre = %s ", root->x.nombre);
+    printf("Categoria = %d ", root->x.categoria);
+    printf("Probabilidad = %f ", root->x.prob_ataque);
+    printf("\n");
+    show_nodes_inorder(root->right);
+
 }

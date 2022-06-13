@@ -2,9 +2,14 @@
 #include <string.h>
 #include <stdlib.h>
 #include "arbol_AVL.h"
+enum OPTIONS {NOMBRE = 1, CATEGORIA = 2, PROBABILIDAD = 3};
 
 int main(int argc, char* argv[]) {
-    
+
+    struct node *root = NULL;
+
+
+    printf("archivo = %s \n",argv[1]);
     // Se abre el archivo que es entregado por el usuario y se crean variables que utilizaremos para leer los datos del archivo.
     FILE *fp = fopen(argv[1], "r");
     char line[1000];
@@ -25,17 +30,56 @@ int main(int argc, char* argv[]) {
             while(token != NULL){
                 switch (columna) {
 
+                    case NOMBRE:
+                        strcpy(aux.nombre,token);
+
+                        break;
+                    case CATEGORIA:
+                        aux.categoria = atoi(token);
+                        break;
+
+                    case PROBABILIDAD:
+                        aux.prob_ataque = atof(token);
+                        break;
+
                     // Agregar los atacantes
                 }
 
                 columna++;
                 token = strtok(NULL, separa);
             }
+
+            root = insert(root, aux);
+//            printf("Kerny = %s",insert(root, aux)->x.nombre);
+
         }
     }
 
     // Se cierra el archivo, puesto que, los datos presentes en el archivo ya fueron ingresados.
+
+    show_nodes_inorder(root);
     fclose(fp);
+
+
+    struct node *contador = root;
+
+    while(contador->right != NULL){
+        contador = contador->right;
+    }
+    printf("CONNEY = %s",contador->x.nombre);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Esta parte es para imprimir en el archivo de salida los nombres de los N mas peligrosos.
 
