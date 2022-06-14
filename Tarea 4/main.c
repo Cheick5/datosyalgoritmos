@@ -60,6 +60,8 @@ int main(int argc, char* argv[]) {
     // Esta parte es para imprimir por pantalla los nombres de los N mas peligrosos.
 
     int Contador = 0;
+    int * pointer = &Contador; //Puntero importante, revisar la función!!!
 
-    show_nodes(root, Contador, N);
+    show_nodes(root, pointer, N);
+
 }

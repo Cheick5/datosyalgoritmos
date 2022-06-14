@@ -137,24 +137,28 @@ struct node *insert(struct node *node, atacante atacante) {
     return node;
 }
 
-// (D,R,I)
-void show_nodes(struct node *root, int Contador, int N){
+// (D,R,I), Usamos un puntero como contador para que al actualizar el valor en las funciones recursivas, se actualice también en las demás
+void show_nodes(struct node *root, int *puntero, int N){
 
     if (root == NULL){
         return;
     }
-
-    if (Contador == N){
+    if (*puntero == N){
         return;
     }
 
-    // Contador = Contador + 1;
 
-    show_nodes(root->right, Contador + 1, N);
 
+    show_nodes(root->right, puntero, N);
+
+    if (*puntero == N){
+        return;
+    }
     printf("Nombre = %s \n", root->x.nombre);
+    *puntero = *puntero + 1;
 
-    show_nodes(root->left, Contador + 1, N);
+
+    show_nodes(root->left, puntero, N);
 
 
     // printf("%d\n", Contador);
