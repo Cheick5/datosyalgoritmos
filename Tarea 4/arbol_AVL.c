@@ -13,23 +13,22 @@ int menor_que(atacante a1, atacante a2)
     }
 
     if (a1.categoria == a2.categoria) { //Si son iguales, vemos las probabilidades
-
-        if(a1.prob_ataque < a2.prob_ataque || (a1.prob_ataque == a2.prob_ataque && strcmp(a1.nombre, a2.nombre) > 0)) {
+        
+        // Caso en el cual o la probabilidad del primero es menor a la del segundo o si son iguales y se comparan los nombres alfabeticamente
+        if(a1.prob_ataque < a2.prob_ataque || (a1.prob_ataque == a2.prob_ataque && strcmp(a1.nombre, a2.nombre) > 0)){  
             return 1;
         }
 
-        else {
+        // else {
 
-            if (strcmp(a1.nombre, a2.nombre) > 0) {
-                return 1;
-            }
-        }
+        //     if (strcmp(a1.nombre, a2.nombre) > 0) {
+        //         return 1;
+        //     }
+        // }
     }
 
     return 0;
 }
-
-
 
 // funcion auxiliar maximo
 int max(int a, int b)
@@ -121,11 +120,11 @@ struct node *insert(struct node *node, atacante atacante) {
         return rightRotate(node);
     }
     // caso right right
-    if (node_balance < -1 && menor_que(atacante,node->right->x) != 1) {
+    if (node_balance < -1 && menor_que(atacante,node->right->x) == 0) {
         return leftRotate(node);
     }
     // caso left right
-    if (node_balance > 1 && menor_que(atacante,node->left->x) != 1 ) {
+    if (node_balance > 1 && menor_que(atacante,node->left->x) == 0 ) {
         node->left = leftRotate(node->left);
         return rightRotate(node);
     }
@@ -138,16 +137,27 @@ struct node *insert(struct node *node, atacante atacante) {
     return node;
 }
 
-// muestra los nodos inorder (I, R, D)
-void show_nodes_inorder(struct node *root) {
-    if (root == NULL) {
+// (D,R,I)
+void show_nodes(struct node *root, int Contador, int N){
+
+    if (root == NULL){
         return;
     }
-    show_nodes_inorder(root->left);
-    printf("Nombre = %s ", root->x.nombre);
-    printf("Categoria = %d ", root->x.categoria);
-    printf("Probabilidad = %f ", root->x.prob_ataque);
-    printf("\n");
-    show_nodes_inorder(root->right);
 
+    if (Contador == N){
+        return;
+    }
+
+    // Contador = Contador + 1;
+
+    show_nodes(root->right, Contador + 1, N);
+
+    printf("Nombre = %s \n", root->x.nombre);
+
+    show_nodes(root->left, Contador + 1, N);
+
+
+    // printf("%d\n", Contador);
+    
+    return;
 }

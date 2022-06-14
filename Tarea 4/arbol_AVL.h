@@ -9,4 +9,4 @@ int balance(struct node *node);
 struct node *leftRotate(struct node *x);
 struct node *rightRotate(struct node *y);
 struct node *insert(struct node *node, atacante atacante);
-void show_nodes_inorder(struct node *root);
+void show_nodes(struct node *root, int Contador, int N);
