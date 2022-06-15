@@ -1,7 +1,7 @@
 // Se incluye el archivo .h que contiene las estructuras. 
 #include "enemigo.h"
 
-
+// Se explicitan los prototipos de todas las funciones que se utilizaran en el desarrollo de la evaluacion (gran parte fue entregada por el profesor)
 int menor_que(atacante a1, atacante a2);
 int max(int a, int b);
 int height(struct node *node);
