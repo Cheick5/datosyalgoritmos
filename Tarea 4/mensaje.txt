@@ -1,5 +1,5 @@
 first_name,danger_category,attack_prob
-Kearney Carding,1,0.2733129
+Kearney Carding,1,0.270000
 Victor Wooten,4,0.7393
 Conney Lochrie,5,0.3
 Ryan Williams,2,0.45

@@ -18,6 +18,7 @@ int menor_que(atacante a1, atacante a2)
         if(a1.prob_ataque < a2.prob_ataque || (a1.prob_ataque == a2.prob_ataque && strcmp(a1.nombre, a2.nombre) > 0)){  
             return 1;
         }
+    }
 
     return 0;
 }
