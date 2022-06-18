@@ -19,14 +19,6 @@ int menor_que(atacante a1, atacante a2)
             return 1;
         }
 
-        else {
-
-            if (strcmp(a1.nombre, a2.nombre) > 0) {
-                return 1;
-            }
-        }
-    }
-
     return 0;
 }
 

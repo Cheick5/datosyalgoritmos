@@ -40,4 +40,13 @@ int show_nodes(struct node *root,int Contador){
     Contador = show_nodes(root->left, Contador);    
 
     return Contador;
+
+
+        // else {
+
+        //     if (strcmp(a1.nombre, a2.nombre) > 0) {
+        //         return 1;
+        //     }
+        // }
+    }
 }
