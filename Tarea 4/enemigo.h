@@ -12,3 +12,6 @@ struct node {
   struct node *right;
   int height;
 };  
+
+
+// wena me quiero matar
